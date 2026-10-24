@@ -1,0 +1,76 @@
+
+[
+  {
+    "id": 1,
+    "name": "Aarav Sharma",
+    "email": "aarav@example.com",
+    "department": "Engineering",
+    "role": "Frontend Developer",
+    "salary": 45000,
+    "status": "Active"
+  },
+  {
+    "id": 2,
+    "name": "Priya Patil",
+    "email": "priya@example.com",
+    "department": "HR",
+    "role": "HR Executive",
+    "salary": 35000,
+    "status": "Active"
+  },
+  {
+    "id": 3,
+    "name": "Rohan Deshmukh",
+    "email": "rohan@example.com",
+    "department": "Engineering",
+    "role": "Backend Developer",
+    "salary": 55000,
+    "status": "Active"
+  },
+  {
+    "id": 4,
+    "name": "Sneha Kulkarni",
+    "email": "sneha@example.com",
+    "department": "Finance",
+    "role": "Accountant",
+    "salary": 40000,
+    "status": "Inactive"
+  },
+  {
+    "id": 5,
+    "name": "Aditya Joshi",
+    "email": "aditya@example.com",
+    "department": "Marketing",
+    "role": "Marketing Executive",
+    "salary": 38000,
+    "status": "Active"
+  },
+  {
+    "id": 6,
+    "name": "Neha Shinde",
+    "email": "neha@example.com",
+    "department": "Engineering",
+    "role": "QA Engineer",
+    "salary": 42000,
+    "status": "Active"
+  },
+  {
+    "id": 7,
+    "name": "Kunal More",
+    "email": "kunal@example.com",
+    "department": "Sales",
+    "role": "Sales Executive",
+    "salary": 32000,
+    "status": "Inactive"
+  },
+  {
+    "id": 8,
+    "name": "Pooja Pawar",
+    "email": "pooja@example.com",
+    "department": "HR",
+    "role": "Recruiter",
+    "salary": 36000,
+    "status": "Active"
+  }
+]
+

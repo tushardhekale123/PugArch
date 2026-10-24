@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="topbar">
+        <div>
+            <h1>EmployeeHub</h1>
+            <p>Employee Management Dashboard</p>
+        </div>
+        <button id="addEmployeeBtn" class="primary-btn">+ Add Employee</button>
+    </header>
+
+    <main class="container">
+        <section class="stats">
+            <article class="stat-card">
+                <span>Total Employees</span>
+                <h2 id="totalEmployees">0</h2>
+            </article>
+            <article class="stat-card">
+                <span>Active Employees</span>
+                <h2 id="activeEmployees">0</h2>
+            </article>
+            <article class="stat-card">
+                <span>Departments</span>
+                <h2 id="totalDepartments">0</h2>
+            </article>
+        </section>
+
+        <section class="panel">
+            <div class="section-heading">
+                <div>
+                    <h2>Employees</h2>
+                    <p>Search, filter and manage your team.</p>
+                </div>
+            </div>
+
+            <div class="filters">
+                <input id="searchInput" type="search"
+                       placeholder="Search by name, email or role">
+
+                <select id="departmentFilter">
+                    <option value="">All Departments</option>
+                </select>
+
+                <select id="sortSelect">
+                    <option value="name-asc">Name: A to Z</option>
+                    <option value="name-desc">Name: Z to A</option>
+                    <option value="salary-asc">Salary: Low to High</option>
+                    <option value="salary-desc">Salary: High to Low</option>
+                </select>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th>Department</th>
+                            <th>Role</th>
+                            <th>Salary</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="employeeTableBody"></tbody>
+                </table>
+            </div>
+
+            <p id="message" class="message"></p>
+        </section>
+    </main>
+
+    <dialog id="employeeDialog">
+        <form id="employeeForm">
+            <div class="dialog-heading">
+                <h2 id="dialogTitle">Add Employee</h2>
+                <button type="button" id="closeDialogBtn"
+                        class="close-btn" aria-label="Close">×</button>
+            </div>
+
+            <input type="hidden" id="employeeId">
+
+            <label for="name">Full Name</label>
+            <input id="name" required maxlength="80">
+
+            <label for="email">Email</label>
+            <input id="email" type="email" required>
+
+            <label for="department">Department</label>
+            <select id="department" required>
+                <option value="">Select department</option>
+                <option>Engineering</option>
+                <option>HR</option>
+                <option>Finance</option>
+                <option>Marketing</option>
+                <option>Sales</option>
+                <option>Operations</option>
+            </select>
+
+            <label for="role">Role</label>
+            <input id="role" required maxlength="80">
+
+            <label for="salary">Monthly Salary (₹)</label>
+            <input id="salary" type="number" min="0" required>
+
+            <label for="status">Status</label>
+            <select id="status" required>
+                <option>Active</option>
+                <option>Inactive</option>
+            </select>
+
+            <button type="submit" class="primary-btn save-btn">
+                Save Employee
+            </button>
+        </form>
+    </dialog>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
