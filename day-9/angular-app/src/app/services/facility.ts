@@ -1,6 +1,7 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 
 export interface Facility {
   id: number;
@@ -10,32 +11,17 @@ export interface Facility {
   score: number;
 }
 
-interface ApiPost {
-  id: number;
-  title: string;
-  body: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
 export class FacilityService {
-
-  private apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+  private apiUrl =
+    'http://localhost:5001/api/facilities';
 
   constructor(private http: HttpClient) {}
 
   getFacilities(): Observable<Facility[]> {
-    return this.http.get<ApiPost[]>(this.apiUrl).pipe(
-      map(posts =>
-        posts.slice(0, 10).map(post => ({
-          id: post.id,
-          name: post.title,
-          location: 'Demo Location',
-          status: post.id % 3 === 0 ? 'Attention' : 'Safe',
-          score: 50 + (post.id % 51)
-        }))
-      )
-    );
+    return this.http.get<Facility[]>(this.apiUrl);
   }
 }
+
