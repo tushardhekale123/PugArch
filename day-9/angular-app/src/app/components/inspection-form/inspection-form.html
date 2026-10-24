@@ -1,0 +1,65 @@
+<div class="inspection-form-card">
+  <h2>New Facility Inspection</h2>
+  <p class="subtitle">Enter the details of your facility inspection.</p>
+
+  <form (ngSubmit)="submitInspection()" #inspectionForm="ngForm">
+
+    <label for="facilityName">Facility Name</label>
+    <input
+      id="facilityName"
+      name="facilityName"
+      [(ngModel)]="facilityName"
+      placeholder="Enter facility name"
+      required
+    />
+
+    <label for="inspectorName">Inspector Name</label>
+    <input
+      id="inspectorName"
+      name="inspectorName"
+      [(ngModel)]="inspectorName"
+      placeholder="Enter inspector name"
+      required
+    />
+
+    <label for="inspectionDate">Inspection Date</label>
+    <input
+      id="inspectionDate"
+      name="inspectionDate"
+      type="date"
+      [(ngModel)]="inspectionDate"
+      required
+    />
+
+    <label for="safetyScore">Safety Score (0–100)</label>
+    <input
+      id="safetyScore"
+      name="safetyScore"
+      type="number"
+      [(ngModel)]="safetyScore"
+      min="0"
+      max="100"
+      required
+    />
+
+    <label for="notes">Inspection Notes</label>
+    <textarea
+      id="notes"
+      name="notes"
+      [(ngModel)]="notes"
+      placeholder="Enter observations or safety issues"
+      rows="4"
+    ></textarea>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <div *ngIf="successMessage" class="success-message">
+      {{ successMessage }}
+    </div>
+
+    <button type="submit">Save Inspection</button>
+
+  </form>
+</div>

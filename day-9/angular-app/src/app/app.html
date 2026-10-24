@@ -1,0 +1,299 @@
+```html
+<div class="dashboard">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-icon">F</span>
+      <span>FacilityCare</span>
+    </div>
+
+    <p class="menu-label">WORKSPACE</p>
+
+    <nav>
+      <a class="nav-item active" href="#dashboard">▦ Dashboard</a>
+      <a class="nav-item" href="#facilities">▣ Facilities</a>
+      <a class="nav-item" href="#inspections">☑ Inspections</a>
+      <a class="nav-item" href="#history">◷ Inspection History</a>
+      <a class="nav-item" href="#new-inspection">＋ New Inspection</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="help-card">
+        <span class="help-icon">✦</span>
+        <h3>Keep it safe!</h3>
+        <p>Regular inspections help maintain a safe facility.</p>
+      </div>
+
+      <div class="user-info">
+        <div class="avatar">TD</div>
+        <div>
+          <strong>Administrator</strong>
+          <small>Facility Manager</small>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Dashboard -->
+  <main class="main-content" id="dashboard">
+
+    <header class="topbar">
+      <div>
+        <p class="breadcrumb">Workspace / Overview</p>
+        <h1>{{ title }}</h1>
+      </div>
+
+      <div class="topbar-right">
+        <span class="today">● System Online</span>
+        <div class="avatar">TD</div>
+      </div>
+    </header>
+
+    <!-- Welcome Banner -->
+    <section class="welcome-banner">
+      <div>
+        <span class="eyebrow">FACILITY MANAGEMENT</span>
+        <h2>Good day, Administrator! 👋</h2>
+        <p>Monitor facility safety and keep every inspection on track.</p>
+      </div>
+
+      <div class="banner-icon">🏢</div>
+    </section>
+
+    <!-- Dashboard Metrics -->
+    <section class="stats-grid">
+
+      <article class="stat-card">
+        <div class="stat-top">
+          <span>Total Facilities</span>
+          <span class="stat-icon blue">▦</span>
+        </div>
+        <h2>{{ totalFacilities }}</h2>
+        <p>Registered facilities</p>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-top">
+          <span>Safe Facilities</span>
+          <span class="stat-icon green">✓</span>
+        </div>
+        <h2>{{ safeFacilities }}</h2>
+        <p>Facilities marked safe</p>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-top">
+          <span>Need Attention</span>
+          <span class="stat-icon orange">!</span>
+        </div>
+        <h2>{{ attentionFacilities }}</h2>
+        <p>Require follow-up</p>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-top">
+          <span>Average Safety Score</span>
+          <span class="stat-icon purple">↗</span>
+        </div>
+        <h2>{{ averageScore }}%</h2>
+        <p>Across all facilities</p>
+      </article>
+
+    </section>
+
+    <!-- Facility List -->
+    <section class="content-card" id="facilities">
+
+      <div class="section-heading">
+        <div>
+          <h2>Facility Overview</h2>
+          <p>Search and monitor your registered facilities.</p>
+        </div>
+
+        <span class="record-count">
+          {{ filteredFacilities.length }} records
+        </span>
+      </div>
+
+      <!-- Search and Filter -->
+      <div class="filters">
+        <input
+          type="text"
+          placeholder="Search facility or location..."
+          [(ngModel)]="searchText"
+          aria-label="Search facilities"
+        />
+
+        <select
+          [(ngModel)]="selectedStatus"
+          aria-label="Filter facilities by status"
+        >
+          <option value="All">All statuses</option>
+          <option value="Safe">Safe</option>
+          <option value="Inspection Due">Inspection Due</option>
+          <option value="Attention">Attention</option>
+        </select>
+      </div>
+
+      <!-- Loading Message -->
+      <div *ngIf="isLoading" class="loading-message">
+        <span class="loading-spinner"></span>
+        Loading facilities from API...
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="error-message">
+        <strong>Unable to load facilities.</strong>
+        <p>{{ errorMessage }}</p>
+
+        <button type="button" (click)="loadFacilities()">
+          Retry
+        </button>
+      </div>
+
+      <!-- Facility Table -->
+      <div class="table-wrapper" *ngIf="!isLoading && !errorMessage">
+
+        <table>
+          <thead>
+            <tr>
+              <th>FACILITY</th>
+              <th>LOCATION</th>
+              <th>SAFETY SCORE</th>
+              <th>STATUS</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let facility of filteredFacilities">
+
+              <td>
+                <div class="facility-name">
+                  <span class="facility-symbol">⌂</span>
+                  <strong>{{ facility.name }}</strong>
+                </div>
+              </td>
+
+              <td>{{ facility.location }}</td>
+
+              <td>
+                <div class="score-cell">
+                  <div class="score-track">
+                    <div
+                      class="score-fill"
+                      [style.width.%]="facility.score"
+                    ></div>
+                  </div>
+
+                  <span>{{ facility.score }}%</span>
+                </div>
+              </td>
+
+              <td>
+                <span
+                  class="status-badge"
+                  [ngClass]="{
+                    'status-safe': facility.status === 'Safe',
+                    'status-due': facility.status === 'Inspection Due',
+                    'status-attention': facility.status === 'Attention'
+                  }"
+                >
+                  {{ facility.status }}
+                </span>
+              </td>
+
+            </tr>
+
+            <tr *ngIf="filteredFacilities.length === 0">
+              <td colspan="4" class="empty-state">
+                No facilities match your search.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+    </section>
+
+    <!-- Inspection Summary and History -->
+    <section class="bottom-grid" id="inspections">
+
+      <article class="content-card">
+        <div class="section-heading">
+          <div>
+            <h2>Inspection Summary</h2>
+            <p>Current facility safety snapshot</p>
+          </div>
+
+          <span class="summary-icon">✓</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Safe facilities</span>
+          <strong>{{ safeFacilities }}</strong>
+        </div>
+
+        <div class="summary-row">
+          <span>Require attention</span>
+          <strong>{{ attentionFacilities }}</strong>
+        </div>
+
+        <div class="summary-row">
+          <span>Total facilities</span>
+          <strong>{{ totalFacilities }}</strong>
+        </div>
+      </article>
+
+      <!-- Inspection History -->
+      <article class="content-card action-card" id="history">
+        <span class="action-icon">📋</span>
+
+        <h2>Inspection History</h2>
+
+        <p>
+          Review inspection records and follow up on facilities that need
+          attention.
+        </p>
+
+        <div *ngIf="inspections.length === 0" class="history-note">
+          No inspections recorded yet. Submit the form below to add one.
+        </div>
+
+        <div
+          *ngIf="inspections.length > 0"
+          class="inspection-history-list"
+        >
+          <h3>Recent Inspections</h3>
+
+          <div
+            *ngFor="let item of inspections"
+            class="summary-row"
+          >
+            <div>
+              <strong>{{ item.facilityName }}</strong>
+              <p>{{ item.inspectorName }} · {{ item.inspectionDate }}</p>
+            </div>
+
+            <span>{{ item.safetyScore }}% — {{ item.status }}</span>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- New Inspection Form -->
+    <section class="content-card" id="new-inspection">
+      <app-inspection-form
+        (inspectionAdded)="addInspection($event)">
+      </app-inspection-form>
+    </section>
+
+    <footer>
+      FacilityCare Dashboard • Day 9 Angular + TypeScript Practice
+    </footer>
+
+  </main>
+</div>
+
