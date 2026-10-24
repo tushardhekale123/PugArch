@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import './App.css';
 
-const API = 'http://localhost:5001/api';
+const API = 'https://avns-9tjmsarep7bympvscr7.onrender.com/api';
 
 function App() {
   const [facilities, setFacilities] = useState([]);
