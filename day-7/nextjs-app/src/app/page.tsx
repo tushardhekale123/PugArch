@@ -12,7 +12,7 @@ interface Employee {
 }
 
 const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/employees";
+  process.env.NEXT_PUBLIC_API_URL || "https://pugarch-day-7-api.onrender.com/api/employees";
 
 export default function Home() {
   const [employees, setEmployees] = useState<Employee[]>([]);
