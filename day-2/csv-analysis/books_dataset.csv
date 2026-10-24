@@ -1,0 +1,11 @@
+id,title,author,category,price,rating
+1,Python Basics,Mark Lee,Programming,550,4.2
+2,Data Science Guide,Sarah Khan,Data,750,4.5
+3,Web Development,John Miller,Programming,650,4.1
+4,Machine Learning Intro,David Roy,AI,900,4.7
+5,SQL Fundamentals,Emma Stone,Database,500,4.0
+6,Python Basics,Mark Lee,Programming,550,4.2
+7,AI for Beginners,Ryan Cole,AI,850,4.6
+8,Database Design,Anna Smith,Database,700,4.3
+9,Data Analytics,Peter John,Data,800,4.4
+10,JavaScript Essentials,Lisa Brown,Programming,600,4.1
