@@ -1,0 +1,3 @@
+Best model: Logistic Regression
+Weighted F1 score: 1.000
+Note: The dataset is a small practice dataset; results are not evidence of real-world performance.
